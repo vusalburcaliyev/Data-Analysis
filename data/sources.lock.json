@@ -1,0 +1,220 @@
+{
+  "publisher": "NOAA National Centers for Environmental Information / National Weather Service",
+  "retrieved_at_utc": "2026-10-30T09:53:19.065246+00:00",
+  "scope": "All Flash Flood records for 2020-2024; geography scoped in the cleaning pipeline",
+  "extraction": "Exact CSV cell strings preserved; only event-type and linked-ID row filters applied",
+  "sources": [
+    {
+      "year": 2020,
+      "table": "details",
+      "filename": "StormEvents_details-ftp_v1.0_d2020_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2020_c20260323.csv.gz",
+      "sha256": "895c56fd46991c4d9a135d67558dc4b447a02a2314efac0ace645135b98f9c9d",
+      "bytes": 10444606,
+      "full_source_rows": 61281
+    },
+    {
+      "year": 2020,
+      "table": "locations",
+      "filename": "StormEvents_locations-ftp_v1.0_d2020_c20260707.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_locations-ftp_v1.0_d2020_c20260707.csv.gz",
+      "sha256": "1acfa963a794940688383f4d278912536a4537238d78b2c383dfeb39c53cba34",
+      "bytes": 1486353,
+      "full_source_rows": 62421
+    },
+    {
+      "year": 2020,
+      "table": "fatalities",
+      "filename": "StormEvents_fatalities-ftp_v1.0_d2020_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_fatalities-ftp_v1.0_d2020_c20260323.csv.gz",
+      "sha256": "21ca88266e1afb6f6c0c8c2c0abc1a81dd2a640ab22a5a3eecf0cd4488242a57",
+      "bytes": 10000,
+      "full_source_rows": 905
+    },
+    {
+      "year": 2021,
+      "table": "details",
+      "filename": "StormEvents_details-ftp_v1.0_d2021_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2021_c20260323.csv.gz",
+      "sha256": "60c1daf96dbe8eafd48c80df5b70df51a0125ab95d467ee7009a646761d57715",
+      "bytes": 10563953,
+      "full_source_rows": 61389
+    },
+    {
+      "year": 2021,
+      "table": "locations",
+      "filename": "StormEvents_locations-ftp_v1.0_d2021_c20260707.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_locations-ftp_v1.0_d2021_c20260707.csv.gz",
+      "sha256": "c33afe92e340673e9062359a1b85c1248f13fbc03e6470cdfd073afc4d088b7b",
+      "bytes": 1249538,
+      "full_source_rows": 52192
+    },
+    {
+      "year": 2021,
+      "table": "fatalities",
+      "filename": "StormEvents_fatalities-ftp_v1.0_d2021_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_fatalities-ftp_v1.0_d2021_c20260323.csv.gz",
+      "sha256": "32ab62515a9509cb9439cd66f01157a15fc7c0132dd24f5fdd4c097ecffcaca1",
+      "bytes": 13322,
+      "full_source_rows": 1266
+    },
+    {
+      "year": 2022,
+      "table": "details",
+      "filename": "StormEvents_details-ftp_v1.0_d2022_c20260625.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2022_c20260625.csv.gz",
+      "sha256": "7d6b79d0049a6edec96b061738289daddba90be26fc9afe7b0a6fd617f21452e",
+      "bytes": 11817849,
+      "full_source_rows": 69887
+    },
+    {
+      "year": 2022,
+      "table": "locations",
+      "filename": "StormEvents_locations-ftp_v1.0_d2022_c20260707.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_locations-ftp_v1.0_d2022_c20260707.csv.gz",
+      "sha256": "b9f0776d941258115e3c1855fb4627e9b7bc2fb7c4a7ad7f0c3d7cc6cae8b845",
+      "bytes": 1141706,
+      "full_source_rows": 47530
+    },
+    {
+      "year": 2022,
+      "table": "fatalities",
+      "filename": "StormEvents_fatalities-ftp_v1.0_d2022_c20260625.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_fatalities-ftp_v1.0_d2022_c20260625.csv.gz",
+      "sha256": "5338c3dc78a13c007f2118913b119ee97ff81209a7274acd827e1268be53e0d5",
+      "bytes": 12162,
+      "full_source_rows": 1223
+    },
+    {
+      "year": 2023,
+      "table": "details",
+      "filename": "StormEvents_details-ftp_v1.0_d2023_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2023_c20260323.csv.gz",
+      "sha256": "713784bed40d9e5a95b1d6240a654f865f3ef97703713105c7b35437270da134",
+      "bytes": 12888092,
+      "full_source_rows": 75593
+    },
+    {
+      "year": 2023,
+      "table": "locations",
+      "filename": "StormEvents_locations-ftp_v1.0_d2023_c20260707.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_locations-ftp_v1.0_d2023_c20260707.csv.gz",
+      "sha256": "100424d6feec5cdf4c282fd41b40588bee4bdcaf28e17fe79bec58d1fa8be52b",
+      "bytes": 1022541,
+      "full_source_rows": 43572
+    },
+    {
+      "year": 2023,
+      "table": "fatalities",
+      "filename": "StormEvents_fatalities-ftp_v1.0_d2023_c20260323.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_fatalities-ftp_v1.0_d2023_c20260323.csv.gz",
+      "sha256": "98d24aaf105a74526b051af6c429a4ed4b22780410e9c5b65d5278fd80d8bc56",
+      "bytes": 14748,
+      "full_source_rows": 1466
+    },
+    {
+      "year": 2024,
+      "table": "details",
+      "filename": "StormEvents_details-ftp_v1.0_d2024_c20260728.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_details-ftp_v1.0_d2024_c20260728.csv.gz",
+      "sha256": "2070b83eccab041b36360ab73645b9a249c3eefc5b92b5b3fc0cbba4d9fcc09c",
+      "bytes": 12693243,
+      "full_source_rows": 69801
+    },
+    {
+      "year": 2024,
+      "table": "locations",
+      "filename": "StormEvents_locations-ftp_v1.0_d2024_c20260728.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_locations-ftp_v1.0_d2024_c20260728.csv.gz",
+      "sha256": "8847a6336e1af94000f7ecfb4a80c06bf0d5c1ac122fe39da5b2e379dc62c1b4",
+      "bytes": 983723,
+      "full_source_rows": 41574
+    },
+    {
+      "year": 2024,
+      "table": "fatalities",
+      "filename": "StormEvents_fatalities-ftp_v1.0_d2024_c20260728.csv.gz",
+      "url": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/StormEvents_fatalities-ftp_v1.0_d2024_c20260728.csv.gz",
+      "sha256": "7113ce3232c98056867cf8d144df770e9e6b140cce40dff3ef46ff805ba17fdb",
+      "bytes": 13057,
+      "full_source_rows": 1141
+    }
+  ],
+  "extracts": [
+    {
+      "path": "data/raw/details_2020.csv.gz",
+      "rows": 3569,
+      "sha256": "d7e4b39cdd96f0cf72f9c62624bf1a239cbfacae6809fcc9db2b54b131f51589"
+    },
+    {
+      "path": "data/raw/locations_2020.csv.gz",
+      "rows": 15062,
+      "sha256": "3bb2f64ee7afcab0de5a6d559bb99d735ae87c7127ed09b22c5b742407b579f6"
+    },
+    {
+      "path": "data/raw/fatalities_2020.csv.gz",
+      "rows": 40,
+      "sha256": "9949cb0fb945ab705756a0c4c33efd22950e2eae4f3a42ec8aba728521df3509"
+    },
+    {
+      "path": "data/raw/details_2021.csv.gz",
+      "rows": 4797,
+      "sha256": "b3ba1b675ea49c9a89f7eba3957710e9f44e13bccea25bd6bd9a1dc38a70a2e6"
+    },
+    {
+      "path": "data/raw/locations_2021.csv.gz",
+      "rows": 16389,
+      "sha256": "0aea0e1128fe579ccd04bcb0a942b15541fec90f54dacf4997dcee45ab7e95e2"
+    },
+    {
+      "path": "data/raw/fatalities_2021.csv.gz",
+      "rows": 140,
+      "sha256": "edc4a8e85a9dec1735221458f55582c859bd45c708aa5777d4c8da9e8e32b9a3"
+    },
+    {
+      "path": "data/raw/details_2022.csv.gz",
+      "rows": 3097,
+      "sha256": "c87e7b77953ade150cc99c8639fbc8e95107af9f8b7a06298369dfec5c50f43a"
+    },
+    {
+      "path": "data/raw/locations_2022.csv.gz",
+      "rows": 8284,
+      "sha256": "9701813939a5f64f055d5489e2312de1e646cbe7d25d75d08947366f5cabd814"
+    },
+    {
+      "path": "data/raw/fatalities_2022.csv.gz",
+      "rows": 74,
+      "sha256": "9555f0b34b82b3ceb6c78d85cdb06ace277a4f79b1f4c37368e740fbb9bc718b"
+    },
+    {
+      "path": "data/raw/details_2023.csv.gz",
+      "rows": 3625,
+      "sha256": "5c4f52d9b1ebcf6fe9a0530af81d547a5e2f7608faef4d66d8997d50bb3e123d"
+    },
+    {
+      "path": "data/raw/locations_2023.csv.gz",
+      "rows": 8967,
+      "sha256": "484334489d9985a6b25c2328c7d04315b295076bb4f7180840edee2c26e9f03b"
+    },
+    {
+      "path": "data/raw/fatalities_2023.csv.gz",
+      "rows": 37,
+      "sha256": "89d8849b00442936d281506a6da6f4f6fd3ab8dd50300f07ffc922816bc2a5ed"
+    },
+    {
+      "path": "data/raw/details_2024.csv.gz",
+      "rows": 4661,
+      "sha256": "45f5578ce3c54fecaf20974191cae74bcc1c708bb710d738fbd3898fd39e5327"
+    },
+    {
+      "path": "data/raw/locations_2024.csv.gz",
+      "rows": 11593,
+      "sha256": "ef7f2ecede7c189fc4a4ccdf20993f28681f5220a46bfb70527238cd9874a450"
+    },
+    {
+      "path": "data/raw/fatalities_2024.csv.gz",
+      "rows": 117,
+      "sha256": "3ed11df7b5024da4909241fd6bbf0c44577f66ccc4153ceffbdd881ae212c42e"
+    }
+  ]
+}

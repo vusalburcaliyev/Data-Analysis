@@ -1,0 +1,5 @@
+population,metric,n,mean,median,p90,p95,p99,max
+Full population,duration_hours,19191,2.6478957150052973,2.0,5.1,6.366666666666666,13.0,608.25
+Full population,property_damage_usd,19191,457527.175238393,0.0,25000.0,100000.0,2000000.0,500000000.0
+Routine comparison population,duration_hours,18012,2.084270671404249,2.0,4.0,5.0,6.0,6.0
+Routine comparison population,property_damage_usd,18012,23444.252165223184,0.0,20000.0,75000.0,500000.0,3400000.0

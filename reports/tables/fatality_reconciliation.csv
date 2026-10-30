@@ -1,0 +1,2 @@
+event_id,year,state,cz_name,deaths_direct,direct_fatality_records,direct_difference,deaths_indirect,indirect_fatality_records,indirect_difference,source_file,source_row
+970467,2021,ALABAMA,TUSCALOOSA,0,2,2,0,0,0,details_2021.csv.gz,222

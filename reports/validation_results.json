@@ -1,0 +1,26 @@
+{
+  "python_tests": {
+    "passed": 13,
+    "failed": 0
+  },
+  "report_logic_checks": [
+    "initial KPI totals",
+    "complete monthly series",
+    "51 state options",
+    "year filter",
+    "state filter",
+    "routine population",
+    "event search",
+    "empty search",
+    "reset",
+    "CSV export"
+  ],
+  "source_extract_sha256": "all 15 verified",
+  "relational_integrity": "SQLite integrity_check and foreign_key_check passed",
+  "notebook": {
+    "executed_code_cells": 9,
+    "total_cells": 23,
+    "error_outputs": 0
+  },
+  "visual_review": "PNG figures inspected; local HTML navigation is blocked by the cloud browser URL policy, so no claim of full browser layout testing is made"
+}

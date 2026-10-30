@@ -1,0 +1,19 @@
+Source data: NOAA National Centers for Environmental Information (NCEI),
+Storm Events Database, using National Weather Service (NWS) records.
+
+Source directory:
+https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/
+
+Field definitions:
+https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Bulk-csv-Format.pdf
+
+NOAA/NWS source material is U.S. government information in the public domain
+unless otherwise specifically annotated. It is not claimed as original
+project data and is not subject to the repository's MIT code license.
+
+NOAA/NWS terms:
+https://www.weather.gov/disclaimer
+
+This independent analysis is not an official NOAA/NWS product and does not
+imply endorsement, affiliation, or verification by NOAA or NWS. Processed
+tables, derived metrics, charts, and interpretations are project outputs.

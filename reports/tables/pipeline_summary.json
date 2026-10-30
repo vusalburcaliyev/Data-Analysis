@@ -1,0 +1,59 @@
+{
+  "source_retrieved_at_utc": "2026-10-30T09:53:19.065246+00:00",
+  "raw_rows": {
+    "details": 19749,
+    "locations": 60295,
+    "fatalities": 408
+  },
+  "model_rows": {
+    "dim_date": 1827,
+    "dim_geography": 2383,
+    "dim_episode": 5162,
+    "fact_event": 19191,
+    "fact_location": 58578,
+    "fact_fatality": 401,
+    "data_issue": 4850
+  },
+  "outlier_thresholds": {
+    "duration_upper_hours": 6.0,
+    "positive_log_damage_upper_usd": 3400537.7821324696
+  },
+  "audit_issue_count": 4850,
+  "rules": [
+    {
+      "severity": "missing",
+      "rule": "missing_context",
+      "records": 43
+    },
+    {
+      "severity": "review",
+      "rule": "extended_duration_review",
+      "records": 9
+    },
+    {
+      "severity": "review",
+      "rule": "fatality_summary_mismatch",
+      "records": 1
+    },
+    {
+      "severity": "review",
+      "rule": "zero_duration",
+      "records": 1269
+    },
+    {
+      "severity": "scope",
+      "rule": "outside_geographic_scope",
+      "records": 558
+    },
+    {
+      "severity": "scope",
+      "rule": "parent_outside_study",
+      "records": 1724
+    },
+    {
+      "severity": "statistical",
+      "rule": "statistical_outlier",
+      "records": 1246
+    }
+  ]
+}
