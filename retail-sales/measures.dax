@@ -1,0 +1,35 @@
+// Create each measure separately. AmountGBP is positive for both sales and credits.
+Sales GBP =
+CALCULATE(SUM(Transactions[AmountGBP]), Transactions[Kind] = "Sale")
+
+Credits GBP =
+CALCULATE(SUM(Transactions[AmountGBP]), Transactions[Kind] = "Credit")
+
+Net Recorded Sales GBP =
+[Sales GBP] - [Credits GBP]
+
+Orders =
+CALCULATE(DISTINCTCOUNT(Transactions[InvoiceNo]), Transactions[Kind] = "Sale")
+
+Average Order Value =
+DIVIDE([Sales GBP], [Orders])
+
+Credit Value Share =
+DIVIDE([Credits GBP], [Sales GBP])
+
+Identified Customers =
+CALCULATE(
+    DISTINCTCOUNTNOBLANK(Transactions[CustomerID]),
+    Transactions[Kind] = "Sale"
+)
+
+Repeat Customers =
+COUNTROWS(
+    FILTER(
+        VALUES(Transactions[CustomerID]),
+        NOT ISBLANK(Transactions[CustomerID]) && [Orders] >= 2
+    )
+) + 0
+
+Repeat Customer Share =
+DIVIDE([Repeat Customers], [Identified Customers])
