@@ -4,9 +4,9 @@
 
 Imagine the shop owner asks: **“Sales look good, but what is left after credits, and are shoppers coming back?”** I used invoice data to answer those questions in order. The goal is a report a shop owner could read and an analyst could check.
 
-[Power BI report](power-bi/) · [SQL queries](sql/) · [Row-level rebuild guide](POWER_BI.md)
+[Power BI report](power-bi/) · [SQL queries](sql/)
 
-The [Power BI project](power-bi/) includes two editable pages for sales and credits, and repeat buyers and credit codes.
+The [Power BI project](power-bi/) includes two pages for sales, credits, and repeat buyers. Download and extract the repository ZIP, open `retail-sales/power-bi/OnlineRetail.pbip` in Power BI Desktop, and select **Refresh**.
 
 ## Background
 
@@ -94,7 +94,7 @@ I used SQL to check the totals and DAX to recalculate sales and order metrics wh
 Average invoice value = DIVIDE([Gross sales], [Sales invoices])
 ```
 
-I used a ratio of two measures so both react to the same filters. If the selection has no orders, DIVIDE gives a blank instead of a division error. [Every measure is explained in the Power BI guide.](POWER_BI.md)
+I used a ratio of two measures so both react to the same filters. If the selection has no orders, DIVIDE gives a blank instead of a division error.
 
 ## Run it again
 

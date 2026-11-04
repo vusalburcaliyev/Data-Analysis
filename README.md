@@ -8,7 +8,7 @@ I wanted to see where U.S. flash-flood losses were concentrated. The state with 
 
 [SQL queries](sql/) · [Analysis notebook](notebooks/01_flash_flood_analysis.ipynb) · [Decision memo](reports/decision_memo.md) · [Power BI report](power-bi/)
 
-The [Power BI project](power-bi/) has editable pages for national trends, state impacts, and reporting quality.
+The [Power BI project](power-bi/) has pages for national trends, state impacts, and reporting quality. Download and extract the repository ZIP, open `power-bi/FlashFloodImpacts.pbip` in Power BI Desktop, and select **Refresh**.
 
 ## Background
 
@@ -177,7 +177,7 @@ python run_pipeline.py
 python -m unittest discover -s tests -v
 ```
 
-The pipeline builds the SQLite database, exports typed model tables and SQL results, creates PNG/SVG figures, and renders the self-contained browser report. To retrieve the original full-source files again:
+The pipeline builds the SQLite database, exports typed model tables and SQL results, and creates PNG and SVG figures. To retrieve the original full-source files again:
 
 ```bash
 python scripts/download_data.py
@@ -189,7 +189,7 @@ The [analysis notebook](notebooks/01_flash_flood_analysis.ipynb) presents execut
 
 ## Validation
 
-**13 automated tests pass** on this source snapshot, supplemented by cross-checks executed during analysis:
+The `tests/` folder checks the cleaning rules and the SQLite model. **13 automated tests pass** on this source snapshot, alongside these checks:
 
 - Raw extract hashes, primary-key uniqueness, SQLite integrity, and foreign-key integrity.
 - Independently reconciled SQL and pandas event counts, property damage, and direct-death totals.
@@ -198,8 +198,6 @@ The [analysis notebook](notebooks/01_flash_flood_analysis.ipynb) presents execut
 - Routine-view filtering is tested separately from the full impact population.
 - Damage parsing covers decimal suffixes, zero versus missing, malformed tokens, and negative values.
 - Duplicate and conflicting-key cases verify that conflicting versions are quarantined rather than arbitrarily selected.
-
-The browser-report calculation and control logic is also checked with a dependency-free simulated-DOM harness: `node scripts/validate_report.js`. It covers year, state, and routine-population filters; search; reset; and CSV export. This is a logic check, not a claim of browser layout testing.
 
 The [GitHub Actions workflow](.github/workflows/validate.yml) rebuilds the study and runs the tests on pushes and pull requests. No API key or external data download is required for that workflow.
 
@@ -213,7 +211,6 @@ The [GitHub Actions workflow](.github/workflows/validate.yml) rebuilds the study
 | `sql/` | Schema, protected event-grain view, and 12 analyses |
 | `notebooks/` | Executed analytical walkthrough |
 | `power-bi/` | Editable Power BI project |
-| `reports/flash_flood_report.html` | Archived browser report |
 | `reports/tables/` | KPI results, sensitivity outputs, exclusions, and audit records |
 | `reports/figures/` | Publication-ready PNG and SVG charts |
 | `docs/` | Metric definitions, model dictionary, quality decisions, and limitations |

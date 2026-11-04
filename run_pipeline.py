@@ -1,4 +1,4 @@
-"""Build, analyze, render, and test the portfolio from committed raw extracts."""
+"""Build the flood model, SQL results, and figures from committed raw extracts."""
 import sys
 from pathlib import Path
 

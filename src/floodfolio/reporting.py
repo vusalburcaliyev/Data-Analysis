@@ -1,10 +1,8 @@
-"""Publication figures and a portable browser report; no external assets required."""
+"""Generate the figures for the flash-flood analysis."""
 from __future__ import annotations
 
-import base64
 import json
 import sqlite3
-from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -13,7 +11,7 @@ from matplotlib.ticker import FuncFormatter
 import numpy as np
 import pandas as pd
 
-from .config import ROOT, DATABASE, EXPORTS, FIGURES
+from .config import DATABASE, EXPORTS, FIGURES
 
 NAVY, TEAL, RUST, GREY, CREAM = "#122e3a", "#087f8c", "#c25a36", "#657982", "#f5f2e9"
 
@@ -131,24 +129,11 @@ def make_figures(e, s):
     save(fig,"07_season_hour")
 
 
-def make_browser_report(events, summary):
-    template = (ROOT / "templates/report.html").read_text()
-    columns = ["event_id","year","month","state","cz_name","property_damage_usd","deaths_direct","injuries_direct","is_overnight_start","duration_hours","valid_location_records","source","episode_id","duration_outlier","damage_outlier","begin_at"]
-    data = json.loads(events[columns].to_json(orient="values"))
-    pipeline=json.loads((EXPORTS / "pipeline_summary.json").read_text())
-    figures={name:base64.b64encode((FIGURES/f"{name}.png").read_bytes()).decode() for name in ["02_loss_concentration","03_overnight_profile","05_reporting_coverage","06_outlier_sensitivity"]}
-    payload=json.dumps({"columns":columns,"events":data,"summary":summary,"pipeline":pipeline,"figures":figures},separators=(",",":"),allow_nan=False).replace("</","<\\/")
-    html=template.replace("__REPORT_DATA__",payload)
-    (ROOT/"reports/flash_flood_report.html").write_text(html)
-    print(f"Browser report: {ROOT/'reports/flash_flood_report.html'}")
-
-
 def main():
     summary=json.loads((EXPORTS/"kpi_summary.json").read_text())
     with sqlite3.connect(DATABASE) as conn:
         events=pd.read_sql("SELECT * FROM vw_event_enriched ORDER BY event_id",conn)
     make_figures(events,summary)
-    make_browser_report(events,summary)
 
 
 if __name__ == "__main__":

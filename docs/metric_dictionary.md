@@ -44,4 +44,4 @@ The damage flag uses the same upper fence on `log(1 + property_damage_usd)` amon
 
 The two flags overlap on 67 events. There are 1,086 duration flags and 160 damage flags, producing **1,179 distinct routine exclusions**. No winsorization, silent replacement, or deletion from the full impact table occurs.
 
-Thresholds are estimated once on the full study population and remain fixed in the browser report. Filtering to one state does not redefine what counts as a statistical tail.
+The routine comparison uses fixed thresholds calculated from the full study population.

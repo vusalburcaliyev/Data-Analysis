@@ -24,8 +24,3 @@ jobs:
         run: python run_pipeline.py
       - name: Test cleaning and model contracts
         run: python -m unittest discover -s tests -v
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-      - name: Validate report calculations and controls
-        run: node scripts/validate_report.js
