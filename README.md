@@ -1,20 +1,59 @@
 # Flash-Flood Impacts: Where the Losses Concentrate
 
-**19,191 events. Three linked NOAA tables. A 4.92× aggregation error avoided before the first KPI.**
+## Introduction
+
+I wanted to see where U.S. flash-flood losses were concentrated. The state with the most events did not have the largest reported property losses, and a small group of events accounted for nearly all the damage. I used those differences to identify where an operations review could start.
 
 ![Flash-flood analysis overview](reports/figures/01_cover.png)
 
-An end-to-end analysis of recorded U.S. flash-flood impacts from **2020–2024**, built to answer a practical question: **where should an operations review start when event volume, financial impact, and human impact point in different directions?**
+[SQL queries](sql/) · [Analysis notebook](notebooks/01_flash_flood_analysis.ipynb) · [Decision memo](reports/decision_memo.md) · [Interactive report](reports/flash_flood_report.html)
 
-The result is a reproducible analytical model, 12 SQL analyses, an interactive browser report, and a documented set of data decisions. The analysis uses public observations rather than simulated business results. It does not claim an implemented intervention or a measured reduction in losses.
+Download the report HTML and open it in a browser to use the filters and CSV export.
 
-**Python · pandas · SQL / SQLite · relational modeling · data validation · Matplotlib · browser reporting**
+## Background
 
-**Explore:** [Decision memo](reports/decision_memo.md) · [Analysis notebook](notebooks/01_flash_flood_analysis.ipynb) · [SQL](sql/) · [KPI definitions](docs/metric_dictionary.md) · [Data quality decisions](docs/data_quality.md)
+I analyzed 19,191 event records from three NOAA tables. I compared frequency, damage and casualties separately because they answer different questions.
 
-For interactive filters and CSV export, download [the browser report](reports/flash_flood_report.html) and open the HTML file. It runs without Python, an account, or an internet connection. GitHub's file viewer displays HTML source rather than running the report.
+### What I used
 
-## The findings
+**Publisher:** NOAA National Centers for Environmental Information / National Weather Service. **Study period:** January 1, 2020–December 31, 2024. **Geography:** 50 U.S. states and Washington, D.C. Territories remain in the raw extracts and are excluded by an explicit scope rule.
+
+| Source table | Source grain | Flash-flood extract rows | In-scope model rows |
+|---|---|---:|---:|
+| Event details | One event ID | 19,749 | 19,191 |
+| Locations | One event ID + location index | 60,295 | 58,578 |
+| Fatalities | One fatality ID | 408 | 401 |
+
+Five yearly files per table yield **15 source snapshots**. Original source URLs, file versions, full-download checksums, extracted-file checksums, and extraction counts are recorded in [sources.lock.json](data/sources.lock.json).
+
+The committed raw extracts retain the original cell strings and columns. Extraction applies only the `Flash Flood` event-type filter and linked-event-ID selection. Full all-hazard downloads are optional, cached locally, and excluded from Git tracking. This keeps the repository reviewable without making the analysis dependent on a live API.
+
+**Primary references:** [bulk files](https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/) · [field definitions](https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Bulk-csv-Format.pdf) · [source-version conventions](https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/README) · [NOAA/NWS use terms](https://www.weather.gov/disclaimer)
+
+### The Questions Answered:
+
+1. How much reported damage came from the highest-loss events?
+2. Did the state with the most events also report the most property damage?
+3. How did the share of direct deaths compare with the share of events that started overnight?
+4. What changed when I filtered outliers, and what reporting gaps remained?
+
+## Tools
+
+- **Python and pandas:** I prepared and checked the event, location and fatality tables.
+- **SQL and SQLite:** I joined and summarized the records without counting a loss twice.
+- **Jupyter and Matplotlib:** I documented the analysis and made the figures.
+- **HTML and JavaScript:** I built the interactive report.
+
+## Analysis
+
+### Findings
+
+1. **Damage was concentrated.** The 192 highest-loss events, about 1% of the records, accounted for 95.2% of reported property damage.
+2. **Frequency and losses pointed to different states.** Texas had the most records (1,504); North Carolina had the most reported property damage ($2.16 billion).
+3. **Overnight events accounted for a larger share of direct deaths than of starts.** They made up 28.8% of events and 53.0% of reported direct deaths. I would check geography, severity and exposure before interpreting that difference as a timing effect.
+4. **Filtering helped describe routine events but removed most of the loss.** The routine filter excluded 6.1% of events and 95.2% of reported property damage. I kept both views and flagged that linked-location coverage fell from 98.0% in 2020 to 57.0% in 2024. Zero damage entries can also mean that loss was not quantified.
+
+#### Evidence behind the findings
 
 | Finding | Evidence | Operational implication |
 |---|---|---|
@@ -27,9 +66,9 @@ For interactive filters and CSV export, download [the browser report](reports/fl
 
 These are descriptive findings about the frozen source snapshot. They are not causal estimates or rankings of underlying flood risk.
 
-## The scorecard
+### The scorecard
 
-### Core impact KPIs
+#### Core impact KPIs
 
 | Metric | Result | Definition |
 |---|---:|---|
@@ -44,7 +83,7 @@ These are descriptive findings about the frozen source snapshot. They are not ca
 | Median recorded event duration | **2.0 hours** | All events with a nonnegative, parseable duration |
 | 90th percentile duration | **5.1 hours** | Full-population empirical 90th percentile |
 
-### Diagnostics that headline totals miss
+#### Diagnostics that headline totals miss
 
 | Metric | Result | Why it changes the interpretation |
 |---|---:|---|
@@ -59,7 +98,7 @@ These are descriptive findings about the frozen source snapshot. They are not ca
 
 Detailed formulas, denominators, populations, and implementation links are in the [metric dictionary](docs/metric_dictionary.md). Machine-readable results are in [reports/tables](reports/tables/).
 
-## The most consequential technical decision: preserve event grain
+### Why I joined the tables at event level
 
 The source is relational. One event can have several location records and several fatality records. Joining both child tables directly to the event table multiplies rows. A later `SUM(property_damage)` then repeats the same loss across that product.
 
@@ -87,23 +126,7 @@ LEFT JOIN fatalities f USING (event_id);
 
 The resulting view has exactly one row per event. Row count, damage totals, and casualty totals are checked independently. The full implementation is in [00_schema.sql](sql/00_schema.sql).
 
-## The data
-
-**Publisher:** NOAA National Centers for Environmental Information / National Weather Service. **Study period:** January 1, 2020–December 31, 2024. **Geography:** 50 U.S. states and Washington, D.C. Territories remain in the raw extracts and are excluded by an explicit scope rule.
-
-| Source table | Source grain | Flash-flood extract rows | In-scope model rows |
-|---|---|---:|---:|
-| Event details | One event ID | 19,749 | 19,191 |
-| Locations | One event ID + location index | 60,295 | 58,578 |
-| Fatalities | One fatality ID | 408 | 401 |
-
-Five yearly files per table yield **15 source snapshots**. Original source URLs, file versions, full-download checksums, extracted-file checksums, and extraction counts are recorded in [sources.lock.json](data/sources.lock.json).
-
-The committed raw extracts retain the original cell strings and columns. Extraction applies only the `Flash Flood` event-type filter and linked-event-ID selection. Full all-hazard downloads are optional, cached locally, and excluded from Git tracking. This keeps the repository reviewable without making the analysis dependent on a live API.
-
-**Primary references:** [bulk files](https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/) · [field definitions](https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Bulk-csv-Format.pdf) · [source-version conventions](https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/README) · [NOAA/NWS use terms](https://www.weather.gov/disclaimer)
-
-## Cleaning and outliers
+### Cleaning and outliers
 
 The pipeline preserves source evidence and separates corrections, scope exclusions, unresolved issues, and statistical filters.
 
@@ -126,7 +149,7 @@ The pipeline preserves source evidence and separates corrections, scope exclusio
 
 A statistical outlier is not an established data error. Extreme reported losses stay in every headline impact measure. [The quality report](docs/data_quality.md) records the policy and the unresolved casualty discrepancy.
 
-## Analytical model
+### Analytical model
 
 ```mermaid
 flowchart TD
