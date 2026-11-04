@@ -1,0 +1,349 @@
+{
+  "name": "FlashFloodImpacts",
+  "compatibilityLevel": 1600,
+  "model": {
+    "name": "Model",
+    "culture": "en-US",
+    "sourceQueryCulture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "discourageImplicitMeasures": true,
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Year\", \"US Monthly\", \"State Summary\", \"Reporting Coverage\", \"Overnight\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      }
+    ],
+    "tables": [
+      {
+        "name": "Year",
+        "columns": [
+          {
+            "name": "Year",
+            "dataType": "string",
+            "sourceColumn": "Year",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [],
+        "partitions": [
+          {
+            "name": "Year",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"i45WMjIwMlCK1QEzDGEMIxjDGMYwUYqNBQA=\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Year\" = nullable text])",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "US Monthly",
+        "columns": [
+          {
+            "name": "Year",
+            "dataType": "string",
+            "sourceColumn": "Year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Events",
+            "dataType": "int64",
+            "sourceColumn": "Events",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Damage USD",
+            "dataType": "double",
+            "sourceColumn": "Damage USD",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Deaths",
+            "dataType": "int64",
+            "sourceColumn": "Deaths",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "US events",
+            "expression": "SUM('US Monthly'[Events])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "US reported damage",
+            "expression": "SUM('US Monthly'[Damage USD])",
+            "formatString": "$#,0.00;($#,0.00)"
+          },
+          {
+            "name": "US direct deaths",
+            "expression": "SUM('US Monthly'[Deaths])",
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "US Monthly",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"dZVbcuwwCET34m/dW+IpWEsq+99GGssVxSP7azylUwi6AX19Hdy5H+38+dfpaNypmRD13v/3xt/tA2Eg4m2w+RsiQIyaiOQVhvoG6dEouaklUTzHsaPJ8Mb4x2lWkG6QA0prypZKLwmNoxlR804Sg86ENiaO5hKNlTuuKmZsTB5NaUCenj6ZLQ7hi7qheNZZ+1Y6QWXixFUpE/ENgcqibYjdY9AE6HRKqY3eb2mscwQY2VRU7SVCuZR1RyDT+JvGYsok9xYj3vIojyIgr8AmO7W1DYJH0AtNIZGj38Rd0ChVurTg0HG5tGcEm9JQGHoH/XWG0j0rGGXBMMLJR15pbVh5JTzKjEx7TqvM0qb9pf4yyqwFjfsw8AT4NMoVV4jcQyyirILGQW8AnILEzjNF287LJbKWkZ2eI8AlDBkoRkvx30FaDExiZ+iWEO25Flg0mGtu0VYyB3JsVNQEOIxMGE56a61FwSIOL/0N1/1t4l+m/IF27G7xok3Zg4z8mpNNm3OQEoVT3iPIJOQ0iEY0EpT0MY8LQpjQ5qn3eVtATZNWx9nVKrohWhsGRXMfb7nUNMmA1R5266eF1L5zVBQpWFXPzJhD4s4Jr06faM+nNh6BwtBFn6tTNqhWnqJ/CZuY6Lmy8smgzue2WgA0xtp8O+XaMoyyxoe8OhGdDxNFPSkud30XU2EIqY6PixYh1Zn1MPU3Al8mtTcDa9Gec7HyEbKL0uWSbIzXWiC0xLC4j+1iRnU3yh5Dg15qqnXXtSWkzbz15mLKIryALOgJ5zmWsaV0LjvDop4d+lgaXbNQD6C/yHxuPEwc/a6r7x8=\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Year\" = nullable text, #\"Month\" = nullable text, #\"Events\" = nullable number, #\"Damage USD\" = nullable number, #\"Deaths\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Events\", Int64.Type}, {\"Deaths\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "State Summary",
+        "columns": [
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Events",
+            "dataType": "int64",
+            "sourceColumn": "Events",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Damage USD",
+            "dataType": "double",
+            "sourceColumn": "Damage USD",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Deaths",
+            "dataType": "int64",
+            "sourceColumn": "Deaths",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "State events",
+            "expression": "SUM('State Summary'[Events])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "State reported damage",
+            "expression": "SUM('State Summary'[Damage USD])",
+            "formatString": "$#,0.00;($#,0.00)"
+          },
+          {
+            "name": "State direct deaths",
+            "expression": "SUM('State Summary'[Deaths])",
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "State Summary",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"VVRdbxs3EPwrgp6Jgrv8fgxstHFTxUXbxCiMPNDSRSJ0OhrHUxz313eX1FlnQPei4S5nZ2f4+Lj+nMfpsLqJY+7TENciWCsQLHrjpJS/SOHxm3hc/9P9jGUtwEgtgjHaBKwoGEZvYp++53FI1MCiFQ6NVarVg+ITf+RzKinyDVZ5+pSzoR1wjH/uXlb/5vFIBAIIK21QcKn3jN/1RC8noqA1CBM0Kt1wNZdvup9pm9dCaSeM4ua6NdB84s9uGMpr/yNWkl5boZwz0pp2xvKZTdoe0j4Oa2G8UNbKmYNsEgxDV0rXMewFOi+9tZ5xLVt5Kfk8JmrvlEBUqOHSHmaSv3dj6V5pikAdUEK4qIRVha/deMrDRDpLK8ChmglUlb+mcZ8q/QCKxlIumHZ/1eDDmP7LLDBIHUTwQep2O9bbP8aXmJib5B1LeVGXoV/7PKYdVRoLxB28XIz9ZYqHtcCghAealzQjJNSdDLu2UbBeuODJM61nrXvoyrS6UtZa0WaswlAb4CwY/56fiZf1KJSyfrnW+0PihXotFMvpa2ld5yaWEreHc+mmiX1JxJX0sytlk/tH5KEAUKDXYdn4UzdM5+2RFuGUERBs8FBR3YwQ00BrBu2pc5BqIceHPpYjdUVCpVwK9VuXaVg2lwIB6KSVcCVTY3Ybj3miE4rWh1bjovohlW0eSiLzAbJjfAhN67qiu108kBRkWxpH+8WYf+fzuwAr8l7QhjL6Nu1NJudup7Q9k7WQ4heAZIZFep7GNhWQLb2SCEsZX1Yf4+m5HNLImpB/bMDwXpKneGL7UGxMzf01+A+v+ZSGPYMUE0O3v9VtEgeqCsJKUx7d4t6bTK6MOxqaksZpDBbenovbric7Mx9NM3CIr4Wf4lD4rUKGtEW4bmFD4aqONeQoJc2i6i6/VCc7slqNxwzcH3uS/nRRVuFcVW34EEmWYT9lWpsi/4IzYSHMeLxwMUCvKqJflG7i+NrHYceFJFZAu0hkW+psF1oKuNm/tfNfh7zrVnelNaC4Az0H5orfpjKNaTut7r+vSMjz6YmNSS8zvLPs/djtmboR7a9v/wM=\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"State\" = nullable text, #\"Events\" = nullable number, #\"Damage USD\" = nullable number, #\"Deaths\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Events\", Int64.Type}, {\"Deaths\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Reporting Coverage",
+        "columns": [
+          {
+            "name": "Year",
+            "dataType": "string",
+            "sourceColumn": "Year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Events",
+            "dataType": "int64",
+            "sourceColumn": "Events",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Linked",
+            "dataType": "int64",
+            "sourceColumn": "Linked",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Zero",
+            "dataType": "int64",
+            "sourceColumn": "Zero",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Valid location coverage",
+            "expression": "DIVIDE(SUM('Reporting Coverage'[Linked]), SUM('Reporting Coverage'[Events]))",
+            "formatString": "0.00%"
+          },
+          {
+            "name": "Zero damage share",
+            "expression": "DIVIDE(SUM('Reporting Coverage'[Zero]), SUM('Reporting Coverage'[Events]))",
+            "formatString": "0.00%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Reporting Coverage",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"LczBDUAhDALQXTxzkJbaOotx/zV+8+OFkEfCOcOmzQFXRQcXTKGL3zmgVMGTPTrzuQ3YLoJZC9yTz71/goWugq2I5+ofxYaFDM7gvR8=\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Year\" = nullable text, #\"Events\" = nullable number, #\"Linked\" = nullable number, #\"Zero\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Events\", Int64.Type}, {\"Linked\", Int64.Type}, {\"Zero\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Overnight",
+        "columns": [
+          {
+            "name": "Start period",
+            "dataType": "string",
+            "sourceColumn": "Start period",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Events",
+            "dataType": "int64",
+            "sourceColumn": "Events",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Deaths",
+            "dataType": "int64",
+            "sourceColumn": "Deaths",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Fatal events",
+            "dataType": "int64",
+            "sourceColumn": "Fatal events",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Fatal event rate",
+            "expression": "DIVIDE(SUM('Overnight'[Fatal events]), SUM('Overnight'[Events]))",
+            "formatString": "0.00%"
+          },
+          {
+            "name": "Direct deaths by start",
+            "expression": "SUM('Overnight'[Deaths])",
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Overnight",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"i45W8i9LLcrLTM8oUSguSSwqUdIxNTWy0DEyMNOxtIzVAcqXZKQWweQMjc3MjHUMLYxBkrEA\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Start period\" = nullable text, #\"Events\" = nullable number, #\"Deaths\" = nullable number, #\"Fatal events\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Events\", Int64.Type}, {\"Deaths\", Int64.Type}, {\"Fatal events\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "f0f1ee4f-35f7-5257-9ad5-1b4f3f386708",
+        "fromTable": "US Monthly",
+        "fromColumn": "Year",
+        "toTable": "Year",
+        "toColumn": "Year"
+      },
+      {
+        "name": "509203fb-2a42-5824-9e58-3cbbea60f560",
+        "fromTable": "Reporting Coverage",
+        "fromColumn": "Year",
+        "toTable": "Year",
+        "toColumn": "Year"
+      }
+    ]
+  }
+}

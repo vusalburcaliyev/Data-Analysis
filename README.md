@@ -6,9 +6,9 @@ I wanted to see where U.S. flash-flood losses were concentrated. The state with 
 
 ![Flash-flood analysis overview](reports/figures/01_cover.png)
 
-[SQL queries](sql/) · [Analysis notebook](notebooks/01_flash_flood_analysis.ipynb) · [Decision memo](reports/decision_memo.md) · [Interactive report](reports/flash_flood_report.html)
+[SQL queries](sql/) · [Analysis notebook](notebooks/01_flash_flood_analysis.ipynb) · [Decision memo](reports/decision_memo.md) · [Power BI report](power-bi/)
 
-Download the report HTML and open it in a browser to use the filters and CSV export.
+The [Power BI project](power-bi/) has editable pages for national trends, state impacts, and reporting quality.
 
 ## Background
 
@@ -42,7 +42,7 @@ The committed raw extracts retain the original cell strings and columns. Extract
 - **Python and pandas:** I prepared and checked the event, location and fatality tables.
 - **SQL and SQLite:** I joined and summarized the records without counting a loss twice.
 - **Jupyter and Matplotlib:** I documented the analysis and made the figures.
-- **HTML and JavaScript:** I built the interactive report.
+- **Power BI and DAX:** I built an editable report for national trends, state impacts, and reporting quality.
 
 ## Analysis
 
@@ -212,7 +212,8 @@ The [GitHub Actions workflow](.github/workflows/validate.yml) rebuilds the study
 | `src/floodfolio/` | Cleaning, model build, analysis, and reporting code |
 | `sql/` | Schema, protected event-grain view, and 12 analyses |
 | `notebooks/` | Executed analytical walkthrough |
-| `reports/flash_flood_report.html` | Portable interactive report |
+| `power-bi/` | Editable Power BI project |
+| `reports/flash_flood_report.html` | Archived browser report |
 | `reports/tables/` | KPI results, sensitivity outputs, exclusions, and audit records |
 | `reports/figures/` | Publication-ready PNG and SVG charts |
 | `docs/` | Metric definitions, model dictionary, quality decisions, and limitations |

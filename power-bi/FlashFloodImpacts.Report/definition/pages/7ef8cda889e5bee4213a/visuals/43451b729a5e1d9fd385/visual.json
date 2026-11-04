@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "43451b729a5e1d9fd385",
+  "position": {
+    "x": 28,
+    "y": 248,
+    "z": 3000,
+    "height": 363,
+    "width": 602,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Reporting Coverage"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "Reporting Coverage.Year",
+              "nativeQueryRef": "Year"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Reporting Coverage"
+                    }
+                  },
+                  "Property": "Valid location coverage"
+                }
+              },
+              "queryRef": "Reporting Coverage.Valid location coverage",
+              "nativeQueryRef": "Valid location coverage"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Reporting Coverage"
+                  }
+                },
+                "Property": "Year"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Share of events with a valid linked location'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

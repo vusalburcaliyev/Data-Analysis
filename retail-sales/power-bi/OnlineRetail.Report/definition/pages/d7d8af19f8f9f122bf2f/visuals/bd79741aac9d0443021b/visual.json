@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "bd79741aac9d0443021b",
+  "position": {
+    "x": 28,
+    "y": 248,
+    "z": 7000,
+    "height": 363,
+    "width": 602,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales and Credits"
+                    }
+                  },
+                  "Property": "Month"
+                }
+              },
+              "queryRef": "Sales and Credits.Month",
+              "nativeQueryRef": "Month"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales and Credits"
+                    }
+                  },
+                  "Property": "Gross sales"
+                }
+              },
+              "queryRef": "Sales and Credits.Gross sales",
+              "nativeQueryRef": "Gross sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales and Credits"
+                    }
+                  },
+                  "Property": "Net recorded sales"
+                }
+              },
+              "queryRef": "Sales and Credits.Net recorded sales",
+              "nativeQueryRef": "Net recorded sales"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Sales and Credits"
+                  }
+                },
+                "Property": "Month"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Gross and net sales by month'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -4,9 +4,9 @@
 
 Imagine the shop owner asks: **“Sales look good, but what is left after credits, and are shoppers coming back?”** I used invoice data to answer those questions in order. The goal is a report a shop owner could read and an analyst could check.
 
-[Sales dashboard](Sales_Dashboard.html) · [Customers and credits dashboard](Customers_and_Credits_Dashboard.html) · [Power BI build guide](POWER_BI.md)
+[Power BI report](power-bi/) · [SQL queries](sql/) · [Row-level rebuild guide](POWER_BI.md)
 
-Download either HTML dashboard and open it in a browser. The Power BI guide explains how to build the same views with filters.
+The [Power BI project](power-bi/) includes two editable pages for sales and credits, and repeat buyers and credit codes.
 
 ## Background
 
@@ -26,7 +26,7 @@ Of 541,909 source lines, 513,921 met the date and value rules. I kept rows with 
 
 - **SQL and SQLite:** I calculated sales, order value, repeat buying and credits.
 - **Python:** I prepared the workbook and checked the totals.
-- **HTML and DAX:** I built browser dashboards and wrote Power BI measures.
+- **Power BI and DAX:** I built an editable report for sales, credits, and repeat buying.
 
 ## Analysis
 
@@ -88,10 +88,10 @@ I also included [the scorecard](sql/01_scorecard.sql) and [average order value](
 
 ### Why I used DAX
 
-SQL produced the checked totals in the browser dashboards. DAX lets the Power BI measures recalculate when a viewer selects a country or month.
+I used SQL to check the totals and DAX to recalculate sales and order metrics when a viewer selects a country or month.
 
 ```dax
-Average Order Value = DIVIDE([Sales GBP], [Orders])
+Average invoice value = DIVIDE([Gross sales], [Sales invoices])
 ```
 
 I used a ratio of two measures so both react to the same filters. If the selection has no orders, DIVIDE gives a blank instead of a division error. [Every measure is explained in the Power BI guide.](POWER_BI.md)
@@ -102,6 +102,6 @@ I used a ratio of two measures so both react to the same filters. If the selecti
 2. Run `python -m pip install -r requirements.txt`.
 3. Run `python build.py "Online Retail.xlsx"` from this directory.
 
-The script builds the dashboards and the CSV for Power BI, then checks that monthly totals add up and that gross sales minus credits equals net recorded sales.
+The script rebuilds the analysis, exports the CSV, and checks that monthly totals add up and that gross sales minus credits equals net recorded sales. The Power BI project embeds the checked summary tables.
 
 Data: Daqing Chen (2015), *Online Retail*, UCI Machine Learning Repository, CC BY 4.0. This project filters and summarizes the original data.

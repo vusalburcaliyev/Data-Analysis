@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "a8611db55960aa3d9992",
+  "position": {
+    "x": 640,
+    "y": 248,
+    "z": 4000,
+    "height": 363,
+    "width": 602,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Credit Codes"
+                    }
+                  },
+                  "Property": "Stock code"
+                }
+              },
+              "queryRef": "Credit Codes.Stock code",
+              "nativeQueryRef": "Stock code"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Credit Codes"
+                    }
+                  },
+                  "Property": "Value credited"
+                }
+              },
+              "queryRef": "Credit Codes.Value credited",
+              "nativeQueryRef": "Value credited"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Credit Codes"
+                  }
+                },
+                "Property": "Value credited"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top 15 stock codes by credited value'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

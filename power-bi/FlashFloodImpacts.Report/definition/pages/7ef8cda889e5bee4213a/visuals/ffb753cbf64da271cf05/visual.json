@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ffb753cbf64da271cf05",
+  "position": {
+    "x": 640,
+    "y": 248,
+    "z": 4000,
+    "height": 363,
+    "width": 602,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Overnight"
+                    }
+                  },
+                  "Property": "Start period"
+                }
+              },
+              "queryRef": "Overnight.Start period",
+              "nativeQueryRef": "Start period"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Overnight"
+                    }
+                  },
+                  "Property": "Fatal event rate"
+                }
+              },
+              "queryRef": "Overnight.Fatal event rate",
+              "nativeQueryRef": "Fatal event rate"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Overnight"
+                  }
+                },
+                "Property": "Fatal event rate"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Share of events with a direct death'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

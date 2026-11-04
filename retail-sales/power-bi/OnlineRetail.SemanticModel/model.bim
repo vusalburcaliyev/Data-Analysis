@@ -1,0 +1,217 @@
+{
+  "name": "OnlineRetail",
+  "compatibilityLevel": 1600,
+  "model": {
+    "name": "Model",
+    "culture": "en-US",
+    "sourceQueryCulture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "discourageImplicitMeasures": true,
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Sales and Credits\", \"Buyer Summary\", \"Credit Codes\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      }
+    ],
+    "tables": [
+      {
+        "name": "Sales and Credits",
+        "columns": [
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Gross cents",
+            "dataType": "int64",
+            "sourceColumn": "Gross cents",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Credit cents",
+            "dataType": "int64",
+            "sourceColumn": "Credit cents",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Invoices",
+            "dataType": "int64",
+            "sourceColumn": "Invoices",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Gross sales",
+            "expression": "DIVIDE(SUM('Sales and Credits'[Gross cents]), 100)",
+            "formatString": "£#,0.00;(£#,0.00)"
+          },
+          {
+            "name": "Recorded credits",
+            "expression": "DIVIDE(SUM('Sales and Credits'[Credit cents]), 100)",
+            "formatString": "£#,0.00;(£#,0.00)"
+          },
+          {
+            "name": "Net recorded sales",
+            "expression": "[Gross sales] - [Recorded credits]",
+            "formatString": "£#,0.00;(£#,0.00)"
+          },
+          {
+            "name": "Sales invoices",
+            "expression": "SUM('Sales and Credits'[Invoices])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Average invoice value",
+            "expression": "DIVIDE([Gross sales], [Sales invoices])",
+            "formatString": "£#,0.00;(£#,0.00)"
+          },
+          {
+            "name": "Credit share of sales",
+            "expression": "DIVIDE([Recorded credits], [Gross sales])",
+            "formatString": "0.00%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sales and Credits",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"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\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Month\" = nullable text, #\"Country\" = nullable text, #\"Gross cents\" = nullable number, #\"Credit cents\" = nullable number, #\"Invoices\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Gross cents\", Int64.Type}, {\"Credit cents\", Int64.Type}, {\"Invoices\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Buyer Summary",
+        "columns": [
+          {
+            "name": "Buyer group",
+            "dataType": "string",
+            "sourceColumn": "Buyer group",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Buyers",
+            "dataType": "int64",
+            "sourceColumn": "Buyers",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Known buyers",
+            "expression": "SUM('Buyer Summary'[Buyers])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Repeat buyer rate",
+            "expression": "DIVIDE(CALCULATE([Known buyers], 'Buyer Summary'[Buyer group] = \"Two or more invoices\"), [Known buyers])",
+            "formatString": "0.00%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Buyer Summary",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"i45W8s9LVcjMK8vPTE5V0jE0NbaI1YlWCinPV8gvUsjNL4JLFivpGJmbWsbGAgA=\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Buyer group\" = nullable text, #\"Buyers\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Buyers\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Credit Codes",
+        "columns": [
+          {
+            "name": "Stock code",
+            "dataType": "string",
+            "sourceColumn": "Stock code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Credit cents",
+            "dataType": "int64",
+            "sourceColumn": "Credit cents",
+            "summarizeBy": "none"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Value credited",
+            "expression": "DIVIDE(SUM('Credit Codes'[Credit cents]), 100)",
+            "formatString": "£#,0.00;(£#,0.00)"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Credit Codes",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Snapshot = Json.Document(Binary.Decompress(Binary.FromText(\"Lc45bgMxDAXQqwSqVXBfStmZxIDhBXbSZDD3v0aosUs+8H9yXdu4jL/b9WtZWifQ0DDe+touraMYe+I+EqNZ6+7iaTLlfnv+1A4Gg+9AJMStp2EYTDiM6/njeBqP7+VZURZ4JY+P33PrFkyZcw5F4lFihKx7FSJEgSobTfhsXc1c5f0L1iEJYLAJEhhaoCoJ77wXsLvy/r54xQ8llpSvE0ReJayQDtv2Dw==\", BinaryEncoding.Base64), Compression.Deflate)),",
+                "    Rows = Table.FromRows(Snapshot, type table [#\"Stock code\" = nullable text, #\"Credit cents\" = nullable number]),",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"Credit cents\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      }
+    ],
+    "relationships": []
+  }
+}

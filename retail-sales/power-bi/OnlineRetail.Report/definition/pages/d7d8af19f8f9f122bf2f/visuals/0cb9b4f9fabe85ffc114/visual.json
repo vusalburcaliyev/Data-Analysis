@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "0cb9b4f9fabe85ffc114",
+  "position": {
+    "x": 640,
+    "y": 248,
+    "z": 8000,
+    "height": 363,
+    "width": 602,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales and Credits"
+                    }
+                  },
+                  "Property": "Country"
+                }
+              },
+              "queryRef": "Sales and Credits.Country",
+              "nativeQueryRef": "Country"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales and Credits"
+                    }
+                  },
+                  "Property": "Gross sales"
+                }
+              },
+              "queryRef": "Sales and Credits.Gross sales",
+              "nativeQueryRef": "Gross sales"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Sales and Credits"
+                  }
+                },
+                "Property": "Gross sales"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Gross sales by market'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

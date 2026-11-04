@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "e45c96f9903faab0feaf",
+  "position": {
+    "x": 640,
+    "y": 125,
+    "z": 2000,
+    "height": 108,
+    "width": 602,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Buyer Summary"
+                    }
+                  },
+                  "Property": "Repeat buyer rate"
+                }
+              },
+              "queryRef": "Buyer Summary.Repeat buyer rate",
+              "nativeQueryRef": "Repeat buyer rate"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

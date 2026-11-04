@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "FlashFloodImpacts"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "531610a5-a7da-4684-bd83-abd18c5fc0dd"
+  }
+}
