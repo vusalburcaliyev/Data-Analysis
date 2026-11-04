@@ -1,18 +1,38 @@
 # Online retail: from sales to repeat customers
 
+## Introduction
+
 Imagine the shop owner asks: **“Sales look good, but what is left after credits, and are shoppers coming back?”** I used invoice data to answer those questions in order. The goal is a report a shop owner could read and an analyst could check.
 
 [Sales dashboard](Sales_Dashboard.html) · [Customers and credits dashboard](Customers_and_Credits_Dashboard.html) · [Power BI build guide](POWER_BI.md)
 
 Download either HTML dashboard and open it in a browser. The Power BI guide explains how to build the same views with filters.
 
-## First, decide what counts as a sale
+## Background
+
+### What I counted as a sale
 
 The [UCI Online Retail dataset](https://doi.org/10.24432/C5BW33) comes from a UK online retailer. One row is an invoice line, so a single order can appear on several rows. I used December 2010 through November 2011 and left out December 2011 because the source stops on the ninth.
 
 Of 541,909 source lines, 513,921 met the date and value rules. I kept rows with a positive price and nonzero quantity. A cancellation invoice or a negative quantity goes into the credit group; other valid lines count as sales. I kept rows without customer IDs for sales totals and excluded them only from customer counts. I did not drop large orders or identical lines: the file includes wholesale customers and has no unique line ID to tell whether identical lines are accidental duplicates.
 
-## Then, check how sales move
+### The Questions Answered:
+
+1. How much did the retailer record in gross sales and after credits?
+2. How many identified buyers ordered again?
+3. Where were sales and credits concentrated?
+
+## Tools
+
+- **SQL and SQLite:** I calculated sales, order value, repeat buying and credits.
+- **Python:** I prepared the workbook and checked the totals.
+- **HTML and DAX:** I built browser dashboards and wrote Power BI measures.
+
+## Analysis
+
+### 1. Gross sales and credits
+
+I found £10.03 million in gross recorded sales and £691,688 in credits, leaving £9.34 million in net recorded sales.
 
 **Gross recorded sales** add up sales lines before credits. **Net recorded sales** subtract the value of credit lines. Neither tells us profit because there are no costs in the dataset.
 
@@ -32,7 +52,9 @@ FROM monthly;
 
 I grouped first so the comparison is between two months, not two invoice lines. The first month has no previous month in this study. The [market query](sql/03_markets.sql) then shows which countries account for the most sales.
 
-## Next, ask who came back
+### 2. Identified buyers who ordered again
+
+I found that 2,759 of 4,297 identified buyers (64.21%) placed at least two distinct sales invoices during the year.
 
 A **repeat customer** is a known customer ID with at least two distinct sales invoices in the period. Buying several products on one invoice still counts as one order.
 
@@ -45,7 +67,7 @@ GROUP BY CustomerID;
 
 The [full repeat query](sql/04_customer_repeat.sql) counts customers with two or more orders and divides by the number of identified buyers. This tells us how many buyers came back within the period, not whether they stayed loyal afterward.
 
-## What the numbers said
+### Findings
 
 | Metric | Result |
 |---|---:|
@@ -58,13 +80,13 @@ The [full repeat query](sql/04_customer_repeat.sql) counts customers with two or
 
 The UK accounted for about 84% of gross recorded sales. Credits were about 6.9% of gross recorded sales. The two largest credit codes were AMAZONFEE and M, so the next step is to separate fees and manual entries from merchandise before drawing product conclusions.
 
-## Finally, decide what to investigate
+### 3. Where sales and credits were concentrated
 
 Start with the codes carrying the largest credited value. Some codes represent fees or adjustments rather than products. The [credit query](sql/05_credit_hotspots.sql) groups by product code so the same product can be counted together even if the description varies. High credited value could reflect higher sales or a few large adjustments. Check the original invoices before treating it as a product problem.
 
 I also included [the scorecard](sql/01_scorecard.sql) and [average order value](sql/06_order_value.sql). The order-value query adds up each invoice before taking the average, so large baskets with more lines don't get extra weight.
 
-## Why use DAX as well?
+### Why I used DAX
 
 SQL produced the checked totals in the browser dashboards. DAX lets the Power BI measures recalculate when a viewer selects a country or month.
 
